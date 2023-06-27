@@ -1,7 +1,9 @@
 package com.felix.infrastructure.account;
 
 import com.felix.domain.account.Account;
+import com.felix.domain.account.AccountHistory;
 import com.felix.domain.account.ETransactionType;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
@@ -68,4 +70,6 @@ interface AccountService {
      * @return
      */
     int create(Account account);
+
+    List<AccountHistory> getPage(Long accountId, Long startTs, Long endTs, Long from, Integer size, String direct);
 }

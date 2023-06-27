@@ -1,10 +1,12 @@
 package com.felix.application;
 
 import com.felix.domain.account.Account;
+import com.felix.domain.account.AccountHistory;
 import com.felix.domain.account.EAccountType;
 import com.felix.domain.account.ETransactionType;
 import com.felix.domain.base.RestCode;
 import com.felix.domain.base.Result;
+import com.felix.infrastructure.account.AccountHistoryMapper;
 import com.felix.infrastructure.account.AccountServiceImpl;
 import com.felix.infrastructure.util.IdentifyUtils;
 import org.slf4j.Logger;
@@ -91,4 +93,15 @@ public class AccountController {
         return Result.success(n);
 
     }
+
+    @GetMapping("/history/page")
+    public Result<List<AccountHistory>> historyPage(@RequestParam Long accountId, @RequestParam Long from
+            , @RequestParam Integer size, @RequestParam String direct) {
+        log.info("account-history-page, accountId={}, fromId={}, limit={}, direct={}", accountId, from, size, direct);
+        List<AccountHistory> list = accountService.getPage(accountId, null, null, from, size, direct);
+        return Result.success(list);
+
+    }
+
+
 }

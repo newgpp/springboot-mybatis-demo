@@ -19,6 +19,33 @@
         accountHistoryId, transactionType, accountId, balance, freeze, total, amount, ts, createdTime, updatedTime
     </sql>
 
+    <select id="getPage" resultMap="BaseResultMap">
+        select <include refid="columns"/> from accountHistory
+        where accountId = #{accountId}
+        <if test="startTs != null">
+            and ts >= #{startTs}
+        </if>
+        <if test="endTs != null">
+            <![CDATA[and ts < #{endTs}]]>
+        </if>
+        <if test="from != null">
+            <choose>
+                <when test="direct == 'next'">
+                    <![CDATA[and accountHistoryId >= #{from}]]>
+                    order by accountHistoryId asc
+                </when>
+                <when test="direct == 'prev'">
+                    <![CDATA[and accountHistoryId <= #{from}]]>
+                    order by accountHistoryId desc
+                </when>
+            </choose>
+        </if>
+        <if test="from == null">
+            order by accountHistoryId asc
+        </if>
+        limit #{size}
+    </select>
+
     <insert id="save" parameterType="com.felix.domain.account.Account">
         insert into accountHistory
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -28,5 +55,8 @@
             #{accountHistoryId}, #{transactionType}, #{accountId}, #{balance}, #{freeze}, #{total}, #{amount}, #{ts}
         </trim>
     </insert>
+
+
+
 
 </mapper>

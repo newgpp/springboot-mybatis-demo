@@ -20,14 +20,14 @@ public interface AccountHistoryMapper {
      * @param accountId 账户id
      * @param startTs 开始时间戳
      * @param endTs 结束时间戳
-     * @param fromId 开始id
-     * @param limit 条数
-     * @param direction 方向 up：向前，down：向后
+     * @param from 开始id
+     * @param size 条数
+     * @param direct 方向 next：向前，prev：向后
      * @return
      */
     List<AccountHistory> getPage(@Param("accountId") Long accountId, @Param("startTs") Long startTs
-            , @Param("endTs") Long endTs, @Param("fromId") Long fromId, @Param("limit") Integer limit
-            , @Param("direction") String direction);
+            , @Param("endTs") Long endTs, @Param("from") Long from, @Param("size") Integer size
+            , @Param("direct") String direct);
 
     /**
      * 保存动账流水

@@ -194,4 +194,21 @@ public class AccountServiceImpl implements AccountService {
     public int create(Account account) {
         return accountMapper.save(account);
     }
+
+    /**
+     * 无页码分页
+     * @param accountId
+     * @param startTs
+     * @param endTs
+     * @param from
+     * @param size
+     * @param direct
+     * @return
+     */
+    @Override
+    public List<AccountHistory> getPage(Long accountId, Long startTs, Long endTs, Long from, Integer size, String direct) {
+
+        return accountHistoryMapper.getPage(accountId, startTs, endTs, from, size, direct);
+
+    }
 }
