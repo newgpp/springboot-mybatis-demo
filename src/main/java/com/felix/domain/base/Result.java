@@ -9,7 +9,7 @@ public class Result<T> {
 
     private int code;
 
-    private String errMsg = "";
+    private String errMsg;
 
     private T value;
 
@@ -26,7 +26,6 @@ public class Result<T> {
         result.setErrMsg(errMsg);
         return result;
     }
-
 
 
     public int getCode() {

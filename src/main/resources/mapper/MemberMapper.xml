@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.felix.infrastructure.member.MemberMapper" >
+
+    <resultMap id="BaseResultMap" type="com.felix.domain.member.Member" >
+        <result column="memberId" property="memberId" jdbcType="BIGINT" />
+        <result column="memberName" property="memberName" jdbcType="VARCHAR" />
+        <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="birthday" property="birthday" jdbcType="DATE" />
+        <result column="createdTime" property="createdTime" jdbcType="DATE" />
+        <result column="updatedTime" property="updatedTime" jdbcType="DATE" />
+    </resultMap>
+
+    <sql id="columns">
+        memberId, memberName, mobile, email, birthday, createdTime, updatedTime
+    </sql>
+
+    <insert id="save" parameterType="com.felix.domain.member.Member">
+        insert into member
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            memberId, memberName, mobile,
+            <if test="email != null">email,</if>
+            <if test="birthday != null">birthday,</if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            #{memberId}, #{memberName}, #{mobile},
+            <if test="email != null">#{email},</if>
+            <if test="birthday != null">#{birthday},</if>
+        </trim>
+    </insert>
+
+    <select id="getById" resultMap="BaseResultMap">
+        select <include refid="columns"/> from member where memberId = #{memberId}
+    </select>
+</mapper>
