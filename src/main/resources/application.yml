@@ -1,0 +1,14 @@
+server:
+  port: 8300
+
+mybatis:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  configuration:
+    cache-enabled: false
+
+spring:
+  datasource:
+    url: jdbc:mysql://192.168.159.103:3306/transaction_db?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456

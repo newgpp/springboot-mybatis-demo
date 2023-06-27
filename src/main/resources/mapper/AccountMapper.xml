@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.felix.infrastructure.account.AccountMapper" >
+
+    <resultMap id="BaseResultMap" type="com.felix.domain.account.Account" >
+        <result column="accountId" property="accountId" jdbcType="BIGINT" />
+        <result column="accountType" property="accountType" jdbcType="VARCHAR" />
+        <result column="memberId" property="memberId" jdbcType="BIGINT" />
+        <result column="balance" property="balance" jdbcType="DECIMAL" />
+        <result column="freeze" property="freeze" jdbcType="DECIMAL" />
+        <result column="total" property="total" jdbcType="DECIMAL" />
+        <result column="version" property="version" jdbcType="BIGINT" />
+        <result column="createdTime" property="createdTime" jdbcType="DATE" />
+        <result column="updatedTime" property="updatedTime" jdbcType="DATE" />
+    </resultMap>
+
+    <sql id="columns">
+        accountId, accountType, memberId, balance, freeze, total, version, createdTime, updatedTime
+    </sql>
+
+    <insert id="save" parameterType="com.felix.domain.account.Account">
+        insert into account
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            accountId, accountType, memberId,
+            <if test="balance != null">balance,</if>
+            <if test="freeze != null">freeze,</if>
+            <if test="total != null">total,</if>
+            <if test="version != null">version,</if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            #{accountId, jdbcType=BIGINT}, #{accountType, jdbcType=VARCHAR}, #{memberId, jdbcType=BIGINT},
+            <if test="balance != null">#{balance},</if>
+            <if test="freeze != null">#{freeze},</if>
+            <if test="total != null">#{total},</if>
+            <if test="version != null">#{version},</if>
+        </trim>
+    </insert>
+
+    <select id="getList" resultMap="BaseResultMap">
+        select <include refid="columns"/> from account where memberId = #{memberId} and accountType = #{accountType}
+    </select>
+
+    <select id="getById" resultMap="BaseResultMap">
+        select <include refid="columns"/> from account where accountId = #{accountId}
+    </select>
+
+    <update id="balanceFreeze">
+        update account set balance=balance+#{amount}, freeze=freeze-#{amount}, version=version+1
+        where accountId=#{accountId} and version=#{version}
+    </update>
+
+    <update id="freezeDeduct">
+        update account set freeze=freeze+#{amount}, total=total+#{amount}, version=version+1
+        where accountId=#{accountId} and version=#{version}
+    </update>
+
+    <update id="balanceDeduct">
+        update account set balance=balance+#{amount}, total=total+#{amount}, version=version+1
+        where accountId=#{accountId} and version=#{version}
+    </update>
+</mapper>

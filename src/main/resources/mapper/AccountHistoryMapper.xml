@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.felix.infrastructure.account.AccountHistoryMapper">
+
+    <resultMap id="BaseResultMap" type="com.felix.domain.account.AccountHistory">
+        <result column="accountHistoryId" property="accountHistoryId" jdbcType="BIGINT"/>
+        <result column="transactionType" property="transactionType" jdbcType="VARCHAR"/>
+        <result column="accountId" property="accountId" jdbcType="BIGINT"/>
+        <result column="balance" property="balance" jdbcType="DECIMAL"/>
+        <result column="freeze" property="freeze" jdbcType="DECIMAL"/>
+        <result column="total" property="total" jdbcType="DECIMAL"/>
+        <result column="amount" property="total" jdbcType="DECIMAL"/>
+        <result column="ts" property="ts" jdbcType="BIGINT"/>
+        <result column="createdTime" property="createdTime" jdbcType="DATE"/>
+        <result column="updatedTime" property="updatedTime" jdbcType="DATE"/>
+    </resultMap>
+
+    <sql id="columns">
+        accountHistoryId, transactionType, accountId, balance, freeze, total, amount, ts, createdTime, updatedTime
+    </sql>
+
+    <insert id="save" parameterType="com.felix.domain.account.Account">
+        insert into accountHistory
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            accountHistoryId, transactionType, accountId, balance, freeze, total, amount, ts
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            #{accountHistoryId}, #{transactionType}, #{accountId}, #{balance}, #{freeze}, #{total}, #{amount}, #{ts}
+        </trim>
+    </insert>
+
+</mapper>
