@@ -26,6 +26,14 @@ public class ExceptionAspect {
     }
 
     @ResponseBody
+    @ExceptionHandler(value = {NullPointerException.class})
+    public Result nullErrorHandler(Exception e) {
+        log.error("systemErrorError: ", e);
+        return Result.fail(RestCode.SYSTEM_ERROR, "空指针异常");
+    }
+
+
+    @ResponseBody
     @ExceptionHandler(value = {Exception.class})
     public Result systemErrorHandler(Exception e) {
         log.error("systemError: ", e);

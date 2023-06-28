@@ -35,8 +35,7 @@ public class MemberVO {
         BeanUtils.copyProperties(member, vo);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date birthday = member.getBirthday();
-//        vo.setBirthday(birthday == null ? null : sdf.format(birthday));
-        vo.setBirthday(sdf.format(birthday));
+        vo.setBirthday(birthday == null ? null : sdf.format(birthday));
         vo.setCreatedTime(sdf.format(member.getCreatedTime()));
         vo.setUpdatedTime(sdf.format(member.getUpdatedTime()));
         return vo;
