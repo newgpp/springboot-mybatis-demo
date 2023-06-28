@@ -7,9 +7,9 @@
         <result column="memberName" property="memberName" jdbcType="VARCHAR" />
         <result column="mobile" property="mobile" jdbcType="VARCHAR" />
         <result column="email" property="email" jdbcType="VARCHAR" />
-        <result column="birthday" property="birthday" jdbcType="DATE" />
-        <result column="createdTime" property="createdTime" jdbcType="DATE" />
-        <result column="updatedTime" property="updatedTime" jdbcType="DATE" />
+        <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
+        <result column="createdTime" property="createdTime" jdbcType="TIMESTAMP" />
+        <result column="updatedTime" property="updatedTime" jdbcType="TIMESTAMP" />
     </resultMap>
 
     <sql id="columns">

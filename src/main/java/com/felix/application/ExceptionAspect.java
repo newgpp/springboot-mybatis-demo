@@ -29,6 +29,6 @@ public class ExceptionAspect {
     @ExceptionHandler(value = {Exception.class})
     public Result systemErrorHandler(Exception e) {
         log.error("systemError: ", e);
-        return Result.fail(RestCode.SYSTEM_ERROR, e.getMessage());
+        return Result.fail(RestCode.SYSTEM_ERROR, "系统异常");
     }
 }

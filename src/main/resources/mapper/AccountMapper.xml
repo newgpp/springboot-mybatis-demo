@@ -10,8 +10,8 @@
         <result column="freeze" property="freeze" jdbcType="DECIMAL" />
         <result column="total" property="total" jdbcType="DECIMAL" />
         <result column="version" property="version" jdbcType="BIGINT" />
-        <result column="createdTime" property="createdTime" jdbcType="DATE" />
-        <result column="updatedTime" property="updatedTime" jdbcType="DATE" />
+        <result column="createdTime" property="createdTime" jdbcType="TIMESTAMP" />
+        <result column="updatedTime" property="updatedTime" jdbcType="TIMESTAMP" />
     </resultMap>
 
     <sql id="columns">

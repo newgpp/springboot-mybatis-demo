@@ -1,5 +1,6 @@
 package com.felix.application;
 
+import com.felix.application.vo.MemberVO;
 import com.felix.domain.base.RestCode;
 import com.felix.domain.base.Result;
 import com.felix.domain.member.Member;
@@ -40,9 +41,9 @@ public class MemberController {
     }
 
     @GetMapping("/getById")
-    public Result<Member> getById(@RequestParam Long memberId) {
+    public Result<MemberVO> getById(@RequestParam Long memberId) {
         log.info("member-getById, memberId={}", memberId);
         Member member = memberService.getById(memberId);
-        return Result.success(member);
+        return Result.success(MemberVO.build(member));
     }
 }
