@@ -1,4 +1,6 @@
-package com.felix.domain.base;
+package com.felix.interfaces.vo;
+
+import com.felix.interfaces.enums.RestCode;
 
 /**
  * @author felix

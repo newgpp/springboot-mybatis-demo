@@ -1,8 +1,9 @@
 package com.felix.app;
 
 import com.felix.domain.account.AccountService;
-import com.felix.infra.models.account.Account;
-import com.felix.infra.models.account.AccountHistory;
+import com.felix.domain.dto.NoNumPageDTO;
+import com.felix.infra.models.Account;
+import com.felix.infra.models.AccountHistory;
 import com.felix.interfaces.enums.ETransactionType;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +42,8 @@ public class AccountFacade {
         return accountService.freezeDeduct(orderFreezeDeduct, accountId, amount);
     }
 
-    public List<AccountHistory> getPage(Long accountId, Long startTs, Long endTs, Long from, Integer size, String direct) {
-        return accountService.getPage(accountId, startTs, endTs, from, size, direct);
+    public List<AccountHistory> getPage(NoNumPageDTO pageDTO) {
+        return accountService.getPage(pageDTO.getAccountId(), pageDTO.getStartTs(), pageDTO.getEndTs()
+                , pageDTO.getFrom(), pageDTO.getSize(), pageDTO.getDirect());
     }
 }

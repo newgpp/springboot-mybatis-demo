@@ -1,6 +1,6 @@
-package com.felix.infra.account;
+package com.felix.infra.mapper;
 
-import com.felix.infra.models.account.AccountHistory;
+import com.felix.infra.models.AccountHistory;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

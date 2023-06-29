@@ -1,6 +1,6 @@
-package com.felix.infra.models.account;
+package com.felix.infra.models;
 
-import com.felix.domain.base.EntityBase;
+import com.felix.infra.models.EntityBase;
 
 import java.math.BigDecimal;
 

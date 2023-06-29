@@ -1,7 +1,7 @@
 package com.felix.domain.account;
 
-import com.felix.infra.models.account.Account;
-import com.felix.infra.models.account.AccountHistory;
+import com.felix.infra.models.Account;
+import com.felix.infra.models.AccountHistory;
 import com.felix.interfaces.enums.ETransactionType;
 import org.springframework.transaction.annotation.Transactional;
 

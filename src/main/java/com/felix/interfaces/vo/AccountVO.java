@@ -1,6 +1,6 @@
 package com.felix.interfaces.vo;
 
-import com.felix.infra.models.account.Account;
+import com.felix.infra.models.Account;
 
 import java.text.SimpleDateFormat;
 

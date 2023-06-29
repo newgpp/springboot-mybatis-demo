@@ -1,17 +1,21 @@
 package com.felix.interfaces;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.felix.app.AccountFacade;
+import com.felix.domain.dto.NoNumPageDTO;
 import com.felix.interfaces.vo.AccountHistoryVO;
 import com.felix.interfaces.vo.AccountVO;
-import com.felix.infra.models.account.Account;
-import com.felix.infra.models.account.AccountHistory;
+import com.felix.infra.models.Account;
+import com.felix.infra.models.AccountHistory;
 import com.felix.interfaces.enums.EAccountType;
 import com.felix.interfaces.enums.ETransactionType;
-import com.felix.domain.base.RestCode;
-import com.felix.domain.base.Result;
+import com.felix.interfaces.enums.RestCode;
+import com.felix.interfaces.vo.Result;
 import com.felix.infra.util.IdUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -86,10 +90,16 @@ public class AccountController {
     }
 
     @GetMapping("/history/page")
-    public Result<List<AccountHistoryVO>> historyPage(@RequestParam Long accountId, @RequestParam Long from
-            , @RequestParam Integer size, @RequestParam String direct) {
-        log.info("account-history-page, accountId={}, fromId={}, limit={}, direct={}", accountId, from, size, direct);
-        List<AccountHistory> list = accountFacade.getPage(accountId, null, null, from, size, direct);
+    public Result<List<AccountHistoryVO>> historyPage(@Validated NoNumPageDTO pageDTO) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = null;
+        try {
+            json = objectMapper.writeValueAsString(pageDTO);
+        } catch (JsonProcessingException e) {
+            log.error("toJsonError: ", e);
+        }
+        log.info("account-history-page, pageDTO=" + json);
+        List<AccountHistory> list = accountFacade.getPage(pageDTO);
         List<AccountHistoryVO> voList = list.stream().map(AccountHistoryVO::build).collect(Collectors.toList());
         return Result.success(voList);
     }

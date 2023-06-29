@@ -1,12 +1,18 @@
 package com.felix.config;
 
-import com.felix.domain.base.RestCode;
-import com.felix.domain.base.Result;
+import com.felix.interfaces.enums.RestCode;
+import com.felix.interfaces.vo.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
+import org.springframework.validation.BindException;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author felix
@@ -17,6 +23,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ExceptionAspect {
 
     private static Logger log = LoggerFactory.getLogger(ExceptionAspect.class);
+
+    @ResponseBody
+    @ExceptionHandler(value = {BindException.class})
+    public Result validateErrorHandler(Exception e) {
+        log.error("paramError: ", e);
+        String message = "";
+        if(e instanceof BindException){
+            BindException bindEx = (BindException) e;
+            List<FieldError> fieldErrors = bindEx.getFieldErrors();
+            message = fieldErrors.stream().map(DefaultMessageSourceResolvable::getDefaultMessage)
+                    .collect(Collectors.joining(","));
+        }
+        return Result.fail(RestCode.PARAM_ERROR, message);
+    }
 
     @ResponseBody
     @ExceptionHandler(value = {IllegalArgumentException.class})

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.felix.infra.account.AccountMapper" >
+<mapper namespace="com.felix.infra.mapper.AccountMapper" >
 
-    <resultMap id="BaseResultMap" type="com.felix.infra.models.account.Account" >
+    <resultMap id="BaseResultMap" type="com.felix.infra.models.Account" >
         <result column="accountId" property="accountId" jdbcType="BIGINT" />
         <result column="accountType" property="accountType" jdbcType="VARCHAR" />
         <result column="memberId" property="memberId" jdbcType="BIGINT" />
@@ -18,7 +18,7 @@
         accountId, accountType, memberId, balance, freeze, total, version, createdTime, updatedTime
     </sql>
 
-    <insert id="save" parameterType="com.felix.infra.models.account.Account">
+    <insert id="save" parameterType="com.felix.infra.models.Account">
         insert into account
         <trim prefix="(" suffix=")" suffixOverrides=",">
             accountId, accountType, memberId,

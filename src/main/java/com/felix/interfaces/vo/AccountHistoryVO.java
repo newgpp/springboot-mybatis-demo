@@ -1,6 +1,6 @@
 package com.felix.interfaces.vo;
 
-import com.felix.infra.models.account.AccountHistory;
+import com.felix.infra.models.AccountHistory;
 import org.springframework.beans.BeanUtils;
 
 import java.text.SimpleDateFormat;

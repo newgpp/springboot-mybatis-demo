@@ -1,6 +1,6 @@
-package com.felix.infra.member;
+package com.felix.infra.mapper;
 
-import com.felix.infra.models.member.Member;
+import com.felix.infra.models.Member;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

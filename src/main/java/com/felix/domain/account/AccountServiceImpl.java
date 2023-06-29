@@ -1,9 +1,9 @@
 package com.felix.domain.account;
 
-import com.felix.infra.account.AccountHistoryMapper;
-import com.felix.infra.account.AccountMapper;
-import com.felix.infra.models.account.Account;
-import com.felix.infra.models.account.AccountHistory;
+import com.felix.infra.mapper.AccountHistoryMapper;
+import com.felix.infra.mapper.AccountMapper;
+import com.felix.infra.models.Account;
+import com.felix.infra.models.AccountHistory;
 import com.felix.interfaces.enums.ETransactionType;
 import com.felix.infra.util.IdUtils;
 import org.slf4j.Logger;

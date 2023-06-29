@@ -1,4 +1,4 @@
-package com.felix.domain.base;
+package com.felix.infra.models;
 
 import java.util.Date;
 

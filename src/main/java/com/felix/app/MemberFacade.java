@@ -1,7 +1,7 @@
 package com.felix.app;
 
 import com.felix.domain.member.MemberService;
-import com.felix.infra.models.member.Member;
+import com.felix.infra.models.Member;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

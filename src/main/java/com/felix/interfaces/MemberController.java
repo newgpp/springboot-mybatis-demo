@@ -2,10 +2,9 @@ package com.felix.interfaces;
 
 import com.felix.app.MemberFacade;
 import com.felix.interfaces.vo.MemberVO;
-import com.felix.domain.base.RestCode;
-import com.felix.domain.base.Result;
-import com.felix.infra.models.member.Member;
-import com.felix.domain.member.MemberService;
+import com.felix.interfaces.enums.RestCode;
+import com.felix.interfaces.vo.Result;
+import com.felix.infra.models.Member;
 import com.felix.infra.util.IdUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

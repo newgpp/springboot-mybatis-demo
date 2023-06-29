@@ -1,6 +1,6 @@
 package com.felix.interfaces.vo;
 
-import com.felix.infra.models.member.Member;
+import com.felix.infra.models.Member;
 import org.springframework.beans.BeanUtils;
 
 import java.text.SimpleDateFormat;
