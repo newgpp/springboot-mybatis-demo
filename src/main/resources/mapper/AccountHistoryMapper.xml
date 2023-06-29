@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.felix.infrastructure.account.AccountHistoryMapper">
+<mapper namespace="com.felix.infra.account.AccountHistoryMapper">
 
-    <resultMap id="BaseResultMap" type="com.felix.domain.account.AccountHistory">
+    <resultMap id="BaseResultMap" type="com.felix.infra.models.account.AccountHistory">
         <result column="accountHistoryId" property="accountHistoryId" jdbcType="BIGINT"/>
         <result column="transactionType" property="transactionType" jdbcType="VARCHAR"/>
         <result column="accountId" property="accountId" jdbcType="BIGINT"/>
@@ -46,7 +46,7 @@
         limit #{size}
     </select>
 
-    <insert id="save" parameterType="com.felix.domain.account.Account">
+    <insert id="save" parameterType="com.felix.infra.models.account.Account">
         insert into accountHistory
         <trim prefix="(" suffix=")" suffixOverrides=",">
             accountHistoryId, transactionType, accountId, balance, freeze, total, amount, ts
