@@ -5,7 +5,7 @@ import com.felix.domain.base.RestCode;
 import com.felix.domain.base.Result;
 import com.felix.domain.member.Member;
 import com.felix.infrastructure.member.MemberService;
-import com.felix.infrastructure.util.IdentifyUtils;
+import com.felix.infrastructure.util.IdUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +30,7 @@ public class MemberController {
     public Result<Integer> create(@RequestParam Long memberId, @RequestParam String memberName, @RequestParam String mobile) {
         log.info("member-create, memberName={}, mobile={}", memberName, mobile);
         Member member = new Member();
-        member.setMemberId(memberId == null ? IdentifyUtils.getId() : memberId);
+        member.setMemberId(memberId == null ? IdUtils.nextSnowflakeId() : memberId);
         member.setMemberName(memberName);
         member.setMobile(mobile);
         int n = memberService.create(member);

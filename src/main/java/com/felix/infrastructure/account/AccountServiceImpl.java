@@ -3,7 +3,7 @@ package com.felix.infrastructure.account;
 import com.felix.domain.account.Account;
 import com.felix.domain.account.AccountHistory;
 import com.felix.domain.account.ETransactionType;
-import com.felix.infrastructure.util.IdentifyUtils;
+import com.felix.infrastructure.util.IdUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -173,7 +173,7 @@ public class AccountServiceImpl implements AccountService {
 
     private void saveAccountHistory(ETransactionType type, Account account, BigDecimal amount, long ts) {
         AccountHistory history = new AccountHistory();
-        history.setAccountHistoryId(IdentifyUtils.getId());
+        history.setAccountHistoryId(IdUtils.nextSnowflakeId());
         history.setTransactionType(type.getCode());
         history.setAccountId(account.getAccountId());
         history.setBalance(account.getBalance());

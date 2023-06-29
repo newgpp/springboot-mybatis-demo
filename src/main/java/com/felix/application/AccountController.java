@@ -9,7 +9,7 @@ import com.felix.domain.account.ETransactionType;
 import com.felix.domain.base.RestCode;
 import com.felix.domain.base.Result;
 import com.felix.infrastructure.account.AccountServiceImpl;
-import com.felix.infrastructure.util.IdentifyUtils;
+import com.felix.infrastructure.util.IdUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +42,7 @@ public class AccountController {
             return Result.fail(RestCode.PARAM_ERROR, "无效的账户类型");
         }
         Account account = new Account();
-        account.setAccountId(IdentifyUtils.getId());
+        account.setAccountId(IdUtils.nextSnowflakeId());
         account.setMemberId(memberId);
         account.setAccountType(accountType);
         int n = accountService.create(account);
@@ -66,35 +66,23 @@ public class AccountController {
 
     @PostMapping("/deposit")
     public Result<Integer> deposit(@RequestParam Long accountId, @RequestParam BigDecimal amount) {
-
         log.info("account-deposit, accountId={}, amount={}", accountId, amount);
-
         int n = accountService.balanceDeduct(ETransactionType.deposit, accountId, amount);
-
         return Result.success(n);
-
     }
 
     @PostMapping("/orderFreeze")
     public Result<Integer> orderFreeze(@RequestParam Long accountId, @RequestParam BigDecimal amount) {
-
         log.info("account-orderFreeze, accountId={}, amount={}", accountId, amount);
-
         int n = accountService.balanceFreeze(ETransactionType.orderFreeze, accountId, amount);
-
         return Result.success(n);
-
     }
 
     @PostMapping("/orderFreezeDeduct")
     public Result<Integer> orderFreezeDeduct(@RequestParam Long accountId, @RequestParam BigDecimal amount) {
-
         log.info("account-orderFreezeDeduct, accountId={}, amount={}", accountId, amount);
-
         int n = accountService.freezeDeduct(ETransactionType.orderFreezeDeduct, accountId, amount);
-
         return Result.success(n);
-
     }
 
     @GetMapping("/history/page")
@@ -104,8 +92,5 @@ public class AccountController {
         List<AccountHistory> list = accountService.getPage(accountId, null, null, from, size, direct);
         List<AccountHistoryVO> voList = list.stream().map(AccountHistoryVO::build).collect(Collectors.toList());
         return Result.success(voList);
-
     }
-
-
 }
