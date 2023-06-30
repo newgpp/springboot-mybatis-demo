@@ -12,3 +12,14 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: 123456
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 10
+        readTimeout: 5000
+        loggerLevel: basic
+
+logging.level.com.felix.infra.rest: DEBUG
+
